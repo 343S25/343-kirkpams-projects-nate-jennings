@@ -1,0 +1,119 @@
+body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background-color: #f8f9fa;
+}
+
+h1, h2, h3, h4, h5, h6, .navbar-brand {
+    font-family: 'Arial', 'Helvetica', sans-serif;
+}
+
+.calendar-cell {
+    height: 60px;
+    border: 1px solid #dee2e6;
+    padding: 5px;
+    text-align: right;
+    vertical-align: top;
+    background-color: white;
+    cursor: pointer;
+    position: relative;
+}
+
+.calendar-cell:hover {
+    background-color: #f8f9fa;
+}
+
+
+.month-nav .row {
+    margin-right: -2px;
+    margin-left: -2px;
+}
+
+.month-nav .col {
+    padding: 0 2px;
+}
+
+.month-nav-button {
+    display: block;
+    padding: 10px 5px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    background-color: #f8f9fa;
+    text-align: center;
+    transition: all 0.2s ease-in-out;
+}
+
+.month-nav-button:hover {
+    cursor: pointer;
+    background-color: #e9ecef;
+    text-decoration: none;
+    color: #0d6efd;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    border-color: #0d6efd;
+}
+
+.month-nav-button.active {
+    background-color: #0d6efd;
+    color: white;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+
+
+
+.expense-item {
+    font-size: 0.8rem;
+    background-color: #0d6efd;
+    color: white;
+    padding: 2px 4px;
+    margin-top: 2px;
+    border-radius: 3px;
+    text-align: center;
+}
+
+.holiday-marker {
+    font-size: 0.7rem;
+    color: #dc3545;
+    padding: 4px 4px;
+    margin-top: 2px;
+    border-radius: 4px;
+    text-align: left;
+    background-color: rgba(220, 53, 69, 0.1);
+    max-width: 100%;
+    font-weight: bold;
+}
+
+@media (min-width: 992px) {
+    .container {
+        max-width: 900px;
+    }
+    
+    .calendar-cell {
+        height: 100px;
+    }
+}
+
+
+/*phones screen sizing*/
+
+@media (max-width: 767px) {
+    .month-nav .row {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+    }
+    
+    .month-nav-button {
+        padding: 8px 4px;
+        font-size: 0.75rem;
+        white-space: nowrap;
+    }
+    
+    .calendar-cell {
+        height: 50px;
+        font-size: 0.9rem;
+    }
+    
+    .expense-item {
+        font-size: 0.7rem;
+        padding: 1px 2px;
+    }
+} 
