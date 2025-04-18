@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>B-Cal | Spendings</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles/styles.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="images/bcal-logo.png" alt="B-Cal Budget Calendar Logo Image" height="80" class="me-2">
+                <span>B-Cal</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Calendar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="spendings.html">Spendings</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About Us</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h2 class="mb-0">Monthly Spendings</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <div class="input-group">
+                                    <span class="input-group-text">Month</span>
+                                    <select class="form-select" id="monthSelect">
+                                        <option value="0">January</option>
+                                        <option value="1">February</option>
+                                        <option value="2">March</option>
+                                        <option value="3">April</option>
+                                        <option value="4">May</option>
+                                        <option value="5">June</option>
+                                        <option value="6">July</option>
+                                        <option value="7">August</option>
+                                        <option value="8">September</option>
+                                        <option value="9">October</option>
+                                        <option value="10">November</option>
+                                        <option value="11">December</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Category</th>
+                                    <th>Amount Spent</th>
+                                </tr>
+                            </thead>
+                            <tbody id="spendingTableBody">
+                            </tbody>
+                            <tfoot>
+                                <tr class="table-dark" id="totalRow">
+                                    <th>Total</th>
+                                    <th>$0.00</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentDate = new Date();
+            const currentMonth = currentDate.getMonth();
+            document.getElementById('monthSelect').value = currentMonth;
+            
+            updateExpenseTable(currentMonth);
+            
+            document.getElementById('monthSelect').addEventListener('change', function() {
+                const selectedMonth = parseInt(this.value);
+                updateExpenseTable(selectedMonth);
+            });
+            
+            function updateExpenseTable(month) {
+                const tableBody = document.getElementById('spendingTableBody');
+                tableBody.innerHTML = '';
+                
+                const allExpenses = JSON.parse(localStorage.getItem('expenses')) || [];
+                
+                const currentYear = new Date().getFullYear();
+                const monthExpenses = allExpenses.filter(expense => 
+                    expense.month === month && expense.year === currentYear
+                );
+                
+                const categories = ['food', 'utilities', 'entertainment', 'transportation', 'housing', 'other'];
+                const categoryTotals = {};
+                
+                categories.forEach(category => {
+                    categoryTotals[category] = 0;
+                });
+                
+                monthExpenses.forEach(expense => {
+                    categoryTotals[expense.category] += parseFloat(expense.amount);
+                });
+                
+                let totalSpent = 0;
+                
+                categories.forEach(category => {
+                    const spent = categoryTotals[category] || 0;
+                    
+                    if (spent === 0) return;
+                    
+                    totalSpent += spent;
+                    
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${category.charAt(0).toUpperCase() + category.slice(1)}</td>
+                        <td>$${spent.toFixed(2)}</td>
+                    `;
+                    
+                    tableBody.appendChild(row);
+                });
+                
+                if (totalSpent === 0) {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td colspan="2" class="text-center">No expenses for this month</td>
+                    `;
+                    tableBody.appendChild(row);
+                }
+                
+                const totalRow = document.getElementById('totalRow');
+                totalRow.innerHTML = `
+                    <th>Total</th>
+                    <th>$${totalSpent.toFixed(2)}</th>
+                `;
+            }
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 

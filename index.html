@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>B-Call | Simple Budget Calendar</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles/styles.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="images/bcal-logo.png" alt="B-Cal Budget Calendar Logo Image" height="80" class="me-2">
+                <span>B-Cal</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">Calendar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="spendings.html">Spendings</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About Us</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <h1 class="text-center mb-4">B-Call Budget Tracker</h1>
+        <div class="month-nav mb-3">
+            <div class="row g-1 text-center">
+                <div class="col"><div class="month-nav-button" data-month="0">Jan</div></div>
+                <div class="col"><div class="month-nav-button" data-month="1">Feb</div></div>
+                <div class="col"><div class="month-nav-button" data-month="2">Mar</div></div>
+                <div class="col"><div class="month-nav-button" data-month="3">Apr</div></div>
+                <div class="col"><div class="month-nav-button" data-month="4">May</div></div>
+                <div class="col"><div class="month-nav-button" data-month="5">Jun</div></div>
+                <div class="col"><div class="month-nav-button" data-month="6">Jul</div></div>
+                <div class="col"><div class="month-nav-button" data-month="7">Aug</div></div>
+                <div class="col"><div class="month-nav-button" data-month="8">Sep</div></div>
+                <div class="col"><div class="month-nav-button" data-month="9">Oct</div></div>
+                <div class="col"><div class="month-nav-button" data-month="10">Nov</div></div>
+                <div class="col"><div class="month-nav-button" data-month="11">Dec</div></div>
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col fw-bold">Sun</div>
+            <div class="col fw-bold">Mon</div>
+            <div class="col fw-bold">Tue</div>
+            <div class="col fw-bold">Wed</div>
+            <div class="col fw-bold">Thu</div>
+            <div class="col fw-bold">Fri</div>
+            <div class="col fw-bold">Sat</div>
+        </div>
+
+        <div id="calendar-body">
+        </div>
+    </div>
+
+    <div class="modal fade" id="budgetModal" tabindex="-1" aria-labelledby="budgetModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="budgetModalLabel">Add Expense for <span id="selectedDate"></span></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="dadJoke" class="alert alert-light mb-3 text-center fst-italic"></div>
+                    <form id="expenseForm">
+                        <div class="mb-3">
+                            <label for="category" class="form-label">Category</label>
+                            <select class="form-select" id="category" required>
+                                <option value="">Select Category</option>
+                                <option value="food">Food</option>
+                                <option value="utilities">Utilities</option>
+                                <option value="entertainment">Entertainment</option>
+                                <option value="transportation">Transportation</option>
+                                <option value="housing">Housing</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="expenseName" class="form-label">Expense Name</label>
+                            <input type="text" class="form-control" id="expenseName" placeholder="What did you purchase?" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="amount" class="form-label">Amount ($)</label>
+                            <input type="number" class="form-control" id="amount" min="0" step="0.01" placeholder="0.00" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <a href="https://www.nasdaq.com/market-activity/index/comp" class="btn btn-link" target="_blank">NASDAQ</a>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="saveExpense">Save Expense</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="scripts/script.js"></script>
+</body>
+</html> 
