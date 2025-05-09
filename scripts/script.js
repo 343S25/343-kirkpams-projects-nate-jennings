@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 return response.json();
             })
             .then(holidays => {
-                console.log("Holidays received:", holidays);
+                console.log("got holidays:", holidays);
                 addHolidaysToCalendar(holidays, month, year);
             })
             .catch(error => {
@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     function addHolidaysToCalendar(holidays, month, year) {
         
-        console.log("Adding", holidays.length, "holidays to calendar");
+        
         
         holidays.forEach(holiday => {
             try {
